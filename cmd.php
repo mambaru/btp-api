@@ -11,7 +11,20 @@ for ($i=2;$i<count($argv);$i++) {
 
 if (!isset($param['host'])) $param['host'] = '127.0.0.1';
 if (!isset($param['port'])) $param['port'] = 22400;
-include "../common/utils.php";
+require "../btp-webui/Json.php";
+function send($method,$data,$conn = null) {
+        if (!$conn) $conn = $GLOBALS['conn'];
+        echo $method."\n\t\t".json_encode($data)."\n";
+        try {
+                $r = $conn->request($method,$data)->get();
+                echo "\t\t".var_export($r,true)."\n";
+                return $r;
+        } catch (Exception $e) {
+                echo "FAIL: ";
+                print_r($e);
+        }
+}
+
 $conn = new JsonRpc_Connection(array('host'=>$param['host'],'port'=>$param['port']));
 unset($param['host']);
 unset($param['port']);
