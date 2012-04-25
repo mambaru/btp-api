@@ -11,7 +11,7 @@ for ($i=2;$i<count($argv);$i++) {
 
 if (!isset($param['host'])) $param['host'] = '127.0.0.1';
 if (!isset($param['port'])) $param['port'] = 22400;
-require "../btp-webui/Json.php";
+require "Json.php";
 function send($method,$data,$conn = null) {
         if (!$conn) $conn = $GLOBALS['conn'];
         echo $method."\n\t\t".json_encode($data)."\n";

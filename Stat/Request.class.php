@@ -82,7 +82,7 @@ class Stat_Btp_Request {
 			$this->items[$item['service']][$item['srv']][$item['op']] = array();
 			$this->items_cnt++;
 		}
-		$this->items[$item['service']][$item['srv']][$item['op']][] = $item['ts'];
+		$this->items[$item['service']][$item['srv']][$item['op']][] = intval($item['ts']);
 		
 		if ($this->items_cnt >= 30 || microtime(true)-$this->ts>1) {
 			$this->send(false);
